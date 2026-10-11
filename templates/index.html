@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101714">
+  <title>Headerwatch | Security Header Auditor</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Headerwatch home">
+        <span class="brand-mark" aria-hidden="true">H</span>
+        <span>HEADERWATCH<span class="brand-dot">/</span></span>
+      </a>
+      <span class="topbar-note"><span class="live-dot"></span> PASSIVE HTTP INSPECTION</span>
+    </header>
+
+    <section class="intro" aria-labelledby="page-title">
+      <p class="eyebrow">DEFENSIVE WEB AUDIT <span>·</span> 01 / RESPONSE HEADERS</p>
+      <h1 id="page-title">See the protections<br><em>your browser receives.</em></h1>
+      <p class="intro-copy">Inspect six important HTTP security headers and get a clear, actionable snapshot. No payloads, no exploitation, no saved scan history.</p>
+    </section>
+
+    <section class="scan-panel" aria-label="Website scanner">
+      <form id="scan-form" novalidate>
+        <label for="url-input">Website URL</label>
+        <div class="scan-row">
+          <div class="url-field"><span aria-hidden="true">↗</span><input id="url-input" name="url" type="url" placeholder="https://example.com" autocomplete="url" required></div>
+          <button class="button button-primary" id="analyze-button" type="submit"><span>Analyze website</span><span aria-hidden="true">→</span></button>
+        </div>
+        <p class="form-hint">Public HTTP and HTTPS destinations only. Private, local, and reserved addresses are blocked.</p>
+      </form>
+      <div class="loading-state" id="loading-state" role="status" aria-live="polite" hidden><span class="spinner"></span><span>Checking response headers…</span></div>
+      <p class="error-message" id="error-message" role="alert" hidden></p>
+    </section>
+
+    <section class="results" id="results" aria-live="polite" hidden>
+      <div class="results-heading">
+        <div><p class="eyebrow">AUDIT RESULTS</p><h2>Security overview</h2></div>
+        <button class="button button-quiet" id="scan-again" type="button"><span aria-hidden="true">↻</span> Scan again</button>
+      </div>
+
+      <div class="overview-grid">
+        <article class="score-panel">
+          <div class="score-top"><span class="eyebrow">HEADER SCORE</span><span class="score-status" id="assessment">—</span></div>
+          <div class="score-value"><span id="score">—</span><small>/ 100</small></div>
+          <div class="score-track" aria-hidden="true"><span id="score-bar"></span></div>
+          <p class="score-note">Educational header assessment, not a complete website security rating.</p>
+        </article>
+        <article class="metric"><span class="metric-label">HEADERS CHECKED</span><strong id="checked-count">—</strong><span class="metric-foot">Controls inspected</span></article>
+        <article class="metric metric-good"><span class="metric-label">PROTECTED</span><strong id="present-count">—</strong><span class="metric-foot">Present and not obviously weak</span></article>
+        <article class="metric metric-risk"><span class="metric-label">NEEDS ATTENTION</span><strong id="attention-count">—</strong><span class="metric-foot" id="attention-detail">Missing or weak</span></article>
+      </div>
+
+      <p class="notice" id="scan-notice" hidden></p>
+      <section class="findings-section" aria-labelledby="findings-title">
+        <div class="section-heading"><div><p class="eyebrow">CONTROL-BY-CONTROL</p><h2 id="findings-title">Response header findings</h2></div><span class="http-status" id="http-status"></span></div>
+        <div class="table-wrap"><table>
+          <thead><tr><th scope="col">Security header</th><th scope="col">Status / value</th><th scope="col">Purpose</th><th scope="col">Recommendation</th></tr></thead>
+          <tbody id="findings-body"></tbody>
+        </table></div>
+      </section>
+
+      <section class="risk-section" aria-labelledby="risk-title">
+        <div class="section-heading"><div><p class="eyebrow">WHY IT MATTERS</p><h2 id="risk-title">Risk notes</h2></div><span class="risk-index">06 CHECKS</span></div>
+        <div class="risk-list" id="risk-list"></div>
+      </section>
+
+      <footer class="report-footer">
+        <p id="scan-meta"></p>
+        <button class="button button-download" id="download-report" type="button"><span aria-hidden="true">↓</span> Download HTML report</button>
+      </footer>
+    </section>
+
+    <footer class="site-footer"><span>HEADERWATCH <span class="brand-dot">/</span> EDUCATIONAL TOOL</span><span>Passive checks only · No data retained</span></footer>
+  </main>
+</body>
+</html>
